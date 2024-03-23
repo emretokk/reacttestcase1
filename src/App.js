@@ -1,8 +1,9 @@
 
 function App() {
   return (
-    <div className="bg-gray-600 w-screen h-screen">
+    <div className="flex flex-col items-center bg-gray-800 w-full h-screen">
       <div className="flex w-full justify-center items-center">
+        <span className="mt-[48px]">
         <svg width="186" height="32" viewBox="0 0 186 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g opacity="0.8">
         <path d="M56.5002 28C55.2006 28 54.3999 27.4 53.0917 26.6934C51.7835 25.9867 47.9999 23.1416 47.9999 19.6C47.9999 17.1975 47.3806 15.2543 46.3259 13.7057C45.279 12.169 43.8608 11.1043 42.3855 10.3527C41.6745 9.99064 40.9347 9.69452 40.198 9.4498C39.7685 9.30724 39.5192 8.84608 39.7056 8.4338C40.8866 5.81916 43.5169 4 46.5724 4C50.7316 4 54.1034 7.37168 54.1034 11.531C54.1034 12.4209 53.9491 13.2748 53.6657 14.0672C54.8662 13.2582 56.3126 12.7861 57.869 12.7861C62.0282 12.7861 65.3998 16.1578 65.3998 20.3172C65.3998 25.3244 60.9998 28 56.5002 28Z" fill="#8FB2F5"/>
@@ -17,7 +18,15 @@ function App() {
         <path d="M75.8867 12.4336V23H73.1426V12.4336H75.8867ZM73.0156 9.69922C73.0156 9.27604 73.1491 8.92773 73.416 8.6543C73.6895 8.37435 74.054 8.23438 74.5098 8.23438C74.972 8.23438 75.3366 8.37435 75.6035 8.6543C75.8704 8.92773 76.0039 9.27604 76.0039 9.69922C76.0039 10.1159 75.8672 10.4642 75.5938 10.7441C75.3268 11.0176 74.9688 11.1543 74.5195 11.1543C74.0573 11.1543 73.6895 11.0176 73.416 10.7441C73.1491 10.4642 73.0156 10.1159 73.0156 9.69922Z" fill="white"/>
         </g>
         </svg>
-        <h1></h1>
+        </span>
+      </div>
+      <div className="flex flex-col w-[311px] h-full justify-center items-center">
+        <h1 className="text-white text-xl">Welcome to <span className="text-blue-light">TypeWeather</span></h1>
+        <p className="text-gray-300 text-sm">Choose a location to see the weather forecast</p>
+        {/* SEARCH BAR */}
+        <div className="w-full h-14 p-5 mt-4 bg-gray-600 rounded-lg">
+          <p className="text-gray-400 align-middle">Search location</p>
+        </div>
       </div>
 
     </div>
