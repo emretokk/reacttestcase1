@@ -21,6 +21,7 @@ function App() {
 
   const handleInputChange = (e) => {
     fetchData(e.target.value);
+    console.log(data);
   };
 
   // useEffect(() => {
@@ -97,15 +98,22 @@ function App() {
               type="text"
               onChange={handleInputChange}
             />
-            <input
-              type="button"
-              className="w-4 h-4 bg-white"
-              onClick={() => {
-                console.log(data);
-              }}
-            />
           </form>
         </div>
+        {/* RESULTS */}
+        <ul className="mt-4 w-full">
+          {data.length > 0 ? (
+            data.map((item) => {
+              return (
+                <li className="w-full h-12 bg-gray-500 text-white flex items-center ">
+                  <p className="ml-4">{item.name}</p>
+                </li>
+              );
+            })
+          ) : (
+            <></>
+          )}
+        </ul>
       </div>
     </div>
   );
