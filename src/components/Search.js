@@ -1,13 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link, Route } from "react-router-dom";
 
 function Search() {
-  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  /*const [searchInput, setSearchInput] = useState("");*/
 
   const fetchData = async (city) => {
-    setLoading(true);
     try {
       const { data: response } = await axios.get(
         `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=3&appid=${process.env.REACT_APP_API_KEY}`
@@ -16,20 +14,10 @@ function Search() {
     } catch (error) {
       console.error(error.message);
     }
-    setLoading(false);
   };
-
-  const handleInputChange = (e) => {
-    fetchData(e.target.value);
-    console.log(data);
-  };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
   return (
-    <div className="flex flex-col items-center bg-gray-800 w-full h-screen">
+    <div className="flex flex-col items-center bg-gray-900 w-full h-screen">
       <span className="absolute mt-[48px]">
         <svg
           width="186"
@@ -96,7 +84,9 @@ function Search() {
               className="w-full bg-transparent text-white"
               placeholder="Search location"
               type="text"
-              onChange={handleInputChange}
+              onChange={(e) => {
+                fetchData(e.target.value);
+              }}
             />
           </form>
         </div>
@@ -105,9 +95,14 @@ function Search() {
           {data.length > 0 ? (
             data.map((item) => {
               return (
-                <li className="w-full h-12 bg-gray-500 text-white flex items-center ">
+                /* onclick event eklenecek */
+                <Link
+                  className="w-full h-12 bg-gray-500 text-white flex items-center "
+                  to="city"
+                  state={{ lat: item.lat, lon: item.lon }}
+                >
                   <p className="ml-4">{item.name}</p>
-                </li>
+                </Link>
               );
             })
           ) : (
