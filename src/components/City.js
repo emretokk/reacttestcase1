@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import bg1 from "../assets/bg1.png";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
@@ -20,6 +20,16 @@ function City() {
     }
   };
 
+  useEffect(() => {
+    let interval = setInterval(() => {
+      fetchWeatherData();
+      console.log(weatherData);
+    }, 5000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col items-center gap-4 bg-gray-900 w-full h-screen">
       <div className="flex items-center justify-center w-72 h-72 bg-gray-800 rounded-xl">
@@ -29,14 +39,24 @@ function City() {
             backgroundImage: `url(${bg1})`,
           }}
         >
-          <p className="text-white m-4">Istanbul, TR</p>
-          <button
-            className="w-8 h-8 bg-white"
-            onClick={(e) => {
-              fetchWeatherData(e.target.value);
-              console.log(weatherData);
-            }}
-          ></button>
+          <div className="p-4 h-1/2 w-full text-white">
+            <p className="text-lg">
+              {weatherData.name}, {weatherData.sys.country}
+            </p>
+            <p className="text-sm text-gray-200"> time stuff will be here</p>
+          </div>
+          <div className="p-4 h-1/2 w-full">
+            <div className="w-1/2 h-full text-white">
+              <p className="text-4xl font-extrabold">
+                {parseInt(weatherData.main.temp - 273)}°C
+              </p>
+              <p className="mt-2 text-sm font-bold ">
+                {parseInt(weatherData.main.temp_min - 273)}°C{" / "}
+                {parseInt(weatherData.main.temp_max - 273)}°C
+              </p>
+              <p className="capitalize">{weatherData.weather[0].description}</p>
+            </div>
+          </div>
         </div>
       </div>
       <div className="w-72 h-72 bg-gray-800 rounded-xl"></div>
