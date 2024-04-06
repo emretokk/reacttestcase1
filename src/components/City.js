@@ -7,7 +7,8 @@ function City() {
   const location = useLocation();
   const { lat, lon } = location.state;
 
-  const [weatherData, setWeatherData] = useState([]);
+  const [weatherData, setWeatherData] = useState();
+  const [loadingWeatherData, SetLoadingWeatherData] = useState(true);
 
   const fetchWeatherData = async () => {
     try {
@@ -21,13 +22,11 @@ function City() {
   };
 
   useEffect(() => {
-    let interval = setInterval(() => {
-      fetchWeatherData();
-      console.log(weatherData);
-    }, 5000);
-    return () => {
-      clearInterval(interval);
-    };
+    console.log(weatherData);
+    SetLoadingWeatherData(true);
+    fetchWeatherData();
+    SetLoadingWeatherData(false);
+    console.log(weatherData);
   }, []);
 
   return (
@@ -41,20 +40,30 @@ function City() {
         >
           <div className="p-4 h-1/2 w-full text-white">
             <p className="text-lg">
-              {weatherData.name}, {weatherData.sys.country}
+              {weatherData ? weatherData.name : "yukleniyor"}
             </p>
             <p className="text-sm text-gray-200"> time stuff will be here</p>
           </div>
           <div className="p-4 h-1/2 w-full">
             <div className="w-1/2 h-full text-white">
               <p className="text-4xl font-extrabold">
-                {parseInt(weatherData.main.temp - 273)}°C
+                {weatherData
+                  ? `${parseInt(weatherData.main.temp - 273)}°C`
+                  : "yukleniyor"}
               </p>
               <p className="mt-2 text-sm font-bold ">
-                {parseInt(weatherData.main.temp_min - 273)}°C{" / "}
-                {parseInt(weatherData.main.temp_max - 273)}°C
+                {weatherData
+                  ? `${parseInt(weatherData.main.temp_min - 273)}°C`
+                  : "yukleniyor"}
+                {weatherData
+                  ? `${parseInt(weatherData.main.temp_max - 273)}°C`
+                  : "yukleniyor"}
               </p>
-              <p className="capitalize">{weatherData.weather[0].description}</p>
+              <p className="capitalize text-nowrap">
+                {weatherData
+                  ? weatherData.weather[0].description
+                  : "yukleniyor"}
+              </p>
             </div>
           </div>
         </div>

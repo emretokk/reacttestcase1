@@ -5,11 +5,12 @@ import { fetchWeatherData } from "./City.js";
 
 function Search() {
   const [data, setData] = useState([]);
+  const [weatherData, setWeatherData] = useState([]);
 
   const fetchData = async (city) => {
     try {
       const { data: response } = await axios.get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=3&appid=${process.env.REACT_APP_API_KEY}`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=3&appid=${process.env.REACT_APP_API_KEY}`
       );
       setData(response);
     } catch (error) {
@@ -96,7 +97,6 @@ function Search() {
           {data.length > 0 ? (
             data.map((item) => {
               return (
-                /* onclick event eklenecek */
                 <Link
                   className="w-full h-12 bg-gray-500 text-white flex items-center "
                   to="city"
