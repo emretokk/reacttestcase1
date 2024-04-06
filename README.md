@@ -10,10 +10,10 @@ Birkaç ekran görüntüsü<br />
 ![ss3](https://github.com/emretokk/reacttestcase1/blob/master/src/assets/readme3.png?raw=true)
 
 
-Bazı verileri api kısıtlamaları dolayısıyla statik olarak ekledim.<br />
+Bazı verileri api kısıtlamaları dolayısıyla statik olarak ekledim.<br /><br />
 
-Probabilaty of rain
-Uv Index
+Probabilaty of rain<br />
+Uv Index<br />
 5 Day Forecast
-<br />
+<br /><br />
 Gibi verileri ücretsiz planı kullandığım için alamadım.
