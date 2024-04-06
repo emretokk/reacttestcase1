@@ -12,6 +12,16 @@ import night800 from "../assets/800Night.png";
 import day80x from "../assets/80xDay.png";
 import night80x from "../assets/80xNight.png";
 
+import day2xxicon from "../assets/2xxDay.svg";
+import night2xxicon from "../assets/2xxNight.svg";
+import day5xxicon from "../assets/5xxDay.svg";
+import night5xxicon from "../assets/5xxNight.svg";
+import day800icon from "../assets/800Day.svg";
+import night800icon from "../assets/800Night.svg";
+import day80xicon from "../assets/80xDay.svg";
+import night80xicon from "../assets/80xNight.svg";
+import night80xsvg from "../assets/80xNight.svg";
+
 function City() {
   const location = useLocation();
   const { lat, lon } = location.state;
@@ -134,6 +144,38 @@ function City() {
     }
   };
 
+  const detectIcon = () => {
+    const hours = calculateTime(weatherData.dt * 1000).getHours();
+    const isDayTime = hours > 6 && hours < 20;
+
+    if (weatherData && isDayTime && weatherData.weather[0].id === 800)
+      return day800icon;
+    else if (weatherData && !isDayTime && weatherData.weather[0].id === 800)
+      return night800icon;
+    else if (weatherData && isDayTime && weatherData.weather[0].id > 800)
+      return day80xicon;
+    else if (weatherData && !isDayTime && weatherData.weather[0].id > 800)
+      return night80xsvg;
+    else if (weatherData && isDayTime && weatherData.weather[0].id < 299)
+      return day2xxicon;
+    else if (weatherData && !isDayTime && weatherData.weather[0].id < 299)
+      return night2xxicon;
+    else if (
+      weatherData &&
+      isDayTime &&
+      weatherData.weather[0].id < 599 &&
+      weatherData.weather[0].id > 499
+    )
+      return day5xxicon;
+    else if (
+      weatherData &&
+      !isDayTime &&
+      weatherData.weather[0].id < 599 &&
+      weatherData.weather[0].id > 499
+    )
+      return night5xxicon;
+  };
+
   const detectBackgroundImg = () => {
     const hours = calculateTime(weatherData.dt * 1000).getHours();
     const isDayTime = hours > 6 && hours < 20;
@@ -174,7 +216,7 @@ function City() {
     <div className="flex flex-col items-center gap-4 bg-gray-900 w-full h-screen">
       <div className="flex items-center justify-center w-72 h-72 p-2 bg-gray-800 rounded-xl">
         <div
-          className="w-full h-full rounded-xl"
+          className="relative w-full h-full rounded-xl"
           style={{
             backgroundImage: `url(${
               weatherData ? detectBackgroundImg() : bg1
@@ -193,7 +235,7 @@ function City() {
                 : "yukleniyor"}
             </p>
           </div>
-          <div className="p-4 h-1/2 w-full">
+          <div className="p-4 h-1/2 w-full flex">
             <div className="w-1/2 h-full text-white">
               <p className="text-4xl font-extrabold">
                 {weatherData
@@ -215,6 +257,14 @@ function City() {
                   : "yukleniyor"}
               </p>
             </div>
+            <div
+              className="absolute right-0 bottom-0 w-[161px] h-[166px] bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url(${
+                  weatherData ? detectIcon() : day2xxicon
+                })`,
+              }}
+            ></div>
           </div>
         </div>
       </div>
@@ -243,7 +293,8 @@ function City() {
             >
               <path d="M158.66,196.44l-32,48a8,8,0,1,1-13.32-8.88l32-48a8,8,0,0,1,13.32,8.88ZM232,92a76.08,76.08,0,0,1-76,76H132.28l-29.62,44.44a8,8,0,1,1-13.32-8.88L113.05,168H76A52,52,0,0,1,76,64a53.26,53.26,0,0,1,8.92.76A76.08,76.08,0,0,1,232,92Zm-16,0A60.06,60.06,0,0,0,96,88.46a8,8,0,0,1-16-.92q.21-3.66.77-7.23A38.11,38.11,0,0,0,76,80a36,36,0,0,0,0,72h80A60.07,60.07,0,0,0,216,92Z"></path>
             </svg>
-            <p className="ml-2">Probability of rain</p>
+            <p className="ml-2 grow">Probability of rain</p>
+            <p>25 %</p>
           </li>
           <li className="flex border-b pb-2 border-gray-600">
             <svg
@@ -281,7 +332,8 @@ function City() {
             >
               <path d="M120,40V32a8,8,0,0,1,16,0v8a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-8-8A8,8,0,0,0,50.34,61.66Zm0,116.68-8,8a8,8,0,0,0,11.32,11.32l8-8a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l8-8a8,8,0,0,0-11.32-11.32l-8,8A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l8,8a8,8,0,0,0,11.32-11.32ZM40,120H32a8,8,0,0,0,0,16h8a8,8,0,0,0,0-16Zm88,88a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-8A8,8,0,0,0,128,208Zm96-88h-8a8,8,0,0,0,0,16h8a8,8,0,0,0,0-16Z"></path>
             </svg>
-            <p className="ml-2">UV Index</p>
+            <p className="ml-2 grow">UV Index</p>
+            <p>5</p>
           </li>
         </ul>
       </div>
