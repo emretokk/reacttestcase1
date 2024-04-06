@@ -16,4 +16,4 @@ Probabilaty of rain<br />
 Uv Index<br />
 5 Day Forecast
 <br /><br />
-Gibi verileri ücretsiz planı kullandığım için alamadım.
+Bu verileri ücretsiz planı kullandığım için alamadım.
