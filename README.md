@@ -1,5 +1,5 @@
 Bu uygulamada arama yaparak istediğimiz şehrin anlık hava durumu bilgilerini görebiliyoruz.<br />
-Şehrin o andaki verilere göre dinamik olarak arkaplan görüntüsü ve ikonlar değişebiliyor.<br />
+Şehrin o andaki verilerine göre dinamik olarak arkaplan görüntüsü ve ikonlar değişebiliyor.<br />
 
 Uygulamanın demosunu buradan canlı görebilirsiniz.<br />
 https://iweatheremretok.vercel.app/
