@@ -1,3 +1,5 @@
+Bu projede React ve TailwindCSS teknolojilerini kullandım.
+
 Bu uygulamada arama yaparak istediğimiz şehrin anlık hava durumu bilgilerini görebiliyoruz.<br />
 Şehrin o andaki verilerine göre dinamik olarak arkaplan görüntüsü ve ikonlar değişebiliyor.<br />
 
