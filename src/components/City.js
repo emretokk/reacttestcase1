@@ -3,6 +3,15 @@ import bg1 from "../assets/bg1.png";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
+import day2xx from "../assets/2xxDay.png";
+import night2xx from "../assets/2xxNight.png";
+import day5xx from "../assets/5xxDay.png";
+import night5xx from "../assets/5xxNight.png";
+import day800 from "../assets/800Day.png";
+import night800 from "../assets/800Night.png";
+import day80x from "../assets/80xDay.png";
+import night80x from "../assets/80xNight.png";
+
 function City() {
   const location = useLocation();
   const { lat, lon } = location.state;
@@ -125,8 +134,40 @@ function City() {
     }
   };
 
+  const detectBackgroundImg = () => {
+    const hours = calculateTime(weatherData.dt * 1000).getHours();
+    const isDayTime = hours > 6 && hours < 20;
+    if (weatherData && isDayTime && weatherData.weather[0].id === 800)
+      return day800;
+    else if (weatherData && !isDayTime && weatherData.weather[0].id === 800)
+      return night800;
+    else if (weatherData && isDayTime && weatherData.weather[0].id > 800)
+      return day80x;
+    else if (weatherData && !isDayTime && weatherData.weather[0].id > 800)
+      return night80x;
+    else if (weatherData && isDayTime && weatherData.weather[0].id < 299)
+      return day2xx;
+    else if (weatherData && !isDayTime && weatherData.weather[0].id < 299)
+      return night2xx;
+    else if (
+      weatherData &&
+      isDayTime &&
+      weatherData.weather[0].id < 599 &&
+      weatherData.weather[0].id > 499
+    )
+      return day5xx;
+    else if (
+      weatherData &&
+      !isDayTime &&
+      weatherData.weather[0].id < 599 &&
+      weatherData.weather[0].id > 499
+    )
+      return night5xx;
+  };
+
   useEffect(() => {
     fetchWeatherData();
+    console.log(weatherData);
   }, []);
 
   return (
@@ -135,7 +176,9 @@ function City() {
         <div
           className="w-full h-full rounded-xl"
           style={{
-            backgroundImage: `url(${bg1})`,
+            backgroundImage: `url(${
+              weatherData ? detectBackgroundImg() : bg1
+            })`,
           }}
         >
           <div className="p-4 h-1/2 w-full text-white">
